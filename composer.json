@@ -1,0 +1,29 @@
+{
+    "name": "simoneddy/phooty",
+    "description": "more phooty new era",
+    "type": "project",
+    "license": "MIT",
+    "config": {
+       "bin-dir": "bin"
+    },
+    "authors": [
+        {
+            "name": "Simon Eddy",
+            "email": "simon@simoneddy.com.au"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+       "psr-4": {
+          "Phooty\\": "src"
+       }
+    },
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2",
+        "phpspec/phpspec": "^7.0"
+    }
+}
