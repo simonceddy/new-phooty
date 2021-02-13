@@ -1,0 +1,9 @@
+suites:
+  default:
+    psr4_prefix:  Phooty
+    namespace:    Phooty
+    spec_path:    tests
+    src_path:     src
+
+
+formatter.name:   pretty
