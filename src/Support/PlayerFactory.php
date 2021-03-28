@@ -9,8 +9,7 @@ use Phooty\Entities\{
 class PlayerFactory
 {
     public function __construct(
-        private FootyFaker $faker,
-        private AssignPositions $assignPos
+        private FootyFaker $faker
     ) {
         
     }
@@ -32,8 +31,6 @@ class PlayerFactory
             ));
         }
         
-        return $options['assignPositions'] ? $this->assignPos->assignTo(
-            $players
-        ) : $players;
+        return $players;
     }
 }

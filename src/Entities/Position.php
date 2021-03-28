@@ -3,8 +3,10 @@ namespace Phooty\Entities;
 
 class Position
 {
-    public function __construct(private string $type, private Player $player)
-    {
+    public function __construct(
+        private string $type,
+        private TeamPlayer $teamPlayer
+    ) {
         // TODO: write logic here
     }
 
@@ -14,10 +16,17 @@ class Position
     }
 
     /**
-     * Get the value of player
+     * Get the Player object
+     * 
+     * @return Player
      */ 
     public function player()
     {
-        return $this->player;
+        return $this->teamPlayer->player();
+    }
+
+    public function team()
+    {
+        return $this->teamPlayer->team();
     }
 }

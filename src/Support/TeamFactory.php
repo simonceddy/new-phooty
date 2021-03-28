@@ -9,7 +9,8 @@ class TeamFactory
 {
     public function __construct(
         private FootyFaker $faker,
-        private PlayerFactory $playerFactory
+        private PlayerFactory $playerFactory,
+        private array $positions
     ) {}
 
     public function make(int $amount = 1, array $attributes = [])
@@ -17,17 +18,19 @@ class TeamFactory
         $teams = [];
 
         for ($i=1; $i <= $amount; $i++) {
-            $teams[] = new FootyTeam(
-                new TeamData(
-                    $attributes['city'] ?? $this->faker->city(),
-                    $attributes['name'] ?? Text::pluralize(
-                        $this->faker->teamName()
-                    )
-                ),
-                $this->playerFactory->make(22, [], [
-                    'assignPositions' => true
-                ])
+            $teamData = new TeamData(
+                $attributes['city'] ?? $this->faker->city(),
+                $attributes['name'] ?? Text::pluralize(
+                    $this->faker->teamName()
+                )
             );
+
+            $players = (new AssignPositions($this->positions))->to(
+                (new AssignTeam($teamData))->to(
+                    $this->playerFactory->make(18)
+                )
+            );
+            $teams[] = new FootyTeam($teamData, $players);
         }
         return $teams;
     }

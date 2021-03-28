@@ -1,9 +1,9 @@
 <?php
 
-use Phooty\Entities\Position;
+use Phooty\Config;
 use Phooty\Geometry\PlayingField;
+use Phooty\Kernel;
 use Phooty\MatchConfiguration;
-use Phooty\Support\AssignPositions;
 use Phooty\Support\CSVData;
 use Phooty\Support\FootyFaker;
 use Phooty\Support\PlayerFactory;
@@ -12,15 +12,16 @@ use Phooty\Support\TeamFactory;
 
 require 'vendor/autoload.php';
 
-$kernel = Phooty\Factory::create();
-$config = $kernel->config();
+$app = include_once 'bootstrap/app.php';
 
+$kernel = $app[Kernel::class];
 $footyFaker = new FootyFaker(new CSVData());
-$playerFactory = new PlayerFactory(
+$playerFactory = new PlayerFactory($footyFaker);
+$teamFactory = new TeamFactory(
     $footyFaker,
-    new AssignPositions($config['players.positions'])
+    $playerFactory,
+    $app[Config::class]['players.positions']
 );
-$teamFactory = new TeamFactory($footyFaker, $playerFactory);
 
 $w = 80;
 $l = 110;
@@ -31,13 +32,11 @@ $field = new PlayingField($w, $l);
 $match = new MatchConfiguration($homeTeam, $awayTeam, $field);
 
 $setField = new SetField(
-    $config['players.positions'],
-    $config['players.matchUps']
+    $app[Config::class]['players.positions'],
+    $app[Config::class]['players.matchUps']
 );
 
 $setField->prepare($match);
-
-dd($match->field());
 
 $kernel->run($match);
 

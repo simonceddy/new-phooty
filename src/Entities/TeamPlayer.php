@@ -10,4 +10,20 @@ class TeamPlayer
         private Player $player
     )
     {}
+
+    /**
+     * Get the value of player
+     */ 
+    public function player()
+    {
+        return $this->player;
+    }
+
+    /**
+     * Get the value of team
+     */ 
+    public function team()
+    {
+        return $this->team;
+    }
 }

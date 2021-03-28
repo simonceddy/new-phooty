@@ -7,7 +7,7 @@ class ConfigFactory
 {
     public function load($paths = [])
     {
-        $values = DefaultConfig::all();
+        $values = [];
         if (isset($paths)) {
             // if config is not null attempt to load config files
             $values = array_merge_recursive(

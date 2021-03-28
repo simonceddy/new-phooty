@@ -10,7 +10,7 @@ class AssignPositions
         
     }
 
-    public function assignTo(array $players)
+    public function to(array $players)
     {
         $results = [];
         foreach($this->positions as $positions) {
