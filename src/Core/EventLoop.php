@@ -1,6 +1,8 @@
 <?php
 namespace Phooty\Core;
 
+use Phooty\MatchConfiguration;
+
 class EventLoop
 {
     private bool $active = false;
@@ -10,11 +12,16 @@ class EventLoop
 
     }
 
-    public function start()
-    {
+    public function start(
+        MatchConfiguration $match,
+        callable $onTick = null
+    ) {
         $this->active = true;
 
         while ($this->active) {
+            if (isset($onTick)) {
+                call_user_func($onTick, $match);
+            }
             $this->timer->tick(mt_rand(0, 100));
         }
     }

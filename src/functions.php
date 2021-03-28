@@ -1,6 +1,11 @@
 <?php
 
 if (!function_exists('projectRoot')) {
+    /**
+     * Attempts to locate the project's root directory.
+     *
+     * @return string
+     */
     function projectRoot()
     {
         $current = dirname(__DIR__);

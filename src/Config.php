@@ -1,7 +1,7 @@
 <?php
 namespace Phooty;
 
-class Config
+class Config implements \ArrayAccess
 {
     public function __construct(private array $values = [])
     {
@@ -44,5 +44,25 @@ class Config
         }
         // resolve nested keys
         return $this->resolveFrom($key);
+    }
+
+    public function offsetExists($offset)
+    {
+        // TODO
+    }
+    
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        // does nothing
+    }
+
+    public function offsetUnset($offset)
+    {
+        // does nothing
     }
 }

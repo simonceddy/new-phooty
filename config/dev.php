@@ -2,6 +2,6 @@
 $csvData = new Phooty\Support\CSVData();
 
 return [
-    'surnames' => $csvData('surnames'),
-    'firstNames' => $csvData('firstNames'),
+    'surnames' => fn() => $csvData('surnames'),
+    'firstNames' => fn() => $csvData('firstNames'),
 ];

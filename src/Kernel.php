@@ -20,9 +20,9 @@ class Kernel
         $this->emitter->on('end.loop', new Events\EndLoop($this->eventLoop));
     }
 
-    public function run()
+    public function run(MatchConfiguration $match)
     {
-        $this->eventLoop->start();
+        $this->eventLoop->start($match);
     }
 
     public function config()

@@ -2,18 +2,24 @@
 
 namespace spec\Phooty\Entities;
 
+use Phooty\Entities\Attributes\PlayerData;
 use Phooty\Entities\Player;
 use PhpSpec\ObjectBehavior;
 
 class PlayerSpec extends ObjectBehavior
 {
+    function let(PlayerData $data)
+    {
+        $this->beConstructedWith($data);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(Player::class);
     }
 
-    function it_belongs_to_a_team()
+    function it_has_player_data()
     {
-        $this->team()->shouldReturn(true);
+        $this->data()->shouldBeAnInstanceOf(PlayerData::class);
     }
 }
