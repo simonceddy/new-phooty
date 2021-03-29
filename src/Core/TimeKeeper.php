@@ -19,11 +19,11 @@ class TimeKeeper
     {
         if ($timer->now() >= $this->periodLength) {
             $this->period++;
-            $this->emitter->emit('end.period', [$this->period, $timer]);
+            $this->emitter->emit('period.end', [$this->period, $timer]);
         }
 
         if ($this->period >= $this->totalPeriods) {
-            $this->emitter->emit('end.loop');
+            $this->emitter->emit('loop.end');
         }
     }
 }

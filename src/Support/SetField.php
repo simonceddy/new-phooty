@@ -1,20 +1,30 @@
 <?php
 namespace Phooty\Support;
 
-use Phooty\MatchConfiguration;
+use Phooty\Entities\Team;
+use Phooty\Geometry\PlayingField;
 
 class SetField
 {
     public function __construct(
         private array $positions,
-        private array $matchUps
-    ) {
-        
-    }
+        private MatchUp $matchUp
+    ) {}
 
-    public function prepare(MatchConfiguration $match)
-    {
-        [$width, $length] = $match->field()->dimensions();
+    /**
+     * Place Player entities at initial positions on the playing field
+     *
+     * @param Team $homeTeam
+     * @param Team $awayTeam
+     * @param PlayingField $field
+     *
+     * @return PlayingField
+     */
+    public function prepare(
+        Team $homeTeam, Team $awayTeam, PlayingField $field
+    ) {
+        [$width, $length] = $field->dimensions();
+
 
         $lines = count($this->positions);
 
@@ -29,8 +39,10 @@ class SetField
         // $padL === 0 ?: $gridL += $padL / 2;
         // $padW === 0 ?: $gridW += $padW / 2;
 
-        [$homePlayers, $awayPlayers] = $match->allPlayers();
+        $homePlayers = $homeTeam->players();
+        $awayPlayers = $awayTeam->players();
 
+        // TODO tidy
         foreach ($this->positions as $lineNo => $line) {
             $positions = array_keys($line);
             foreach ($positions as $index => $pos) {
@@ -41,15 +53,13 @@ class SetField
                     $y = $gridL + ($lineNo * $gridL);
                 }
 
-                $match->field()->at(
-                    $x,
-                    $y,
-                    [
-                        $homePlayers[$pos],
-                        $awayPlayers[$this->matchUps[$pos]]
-                    ]
-                );
+                $field->at($x, $y, [
+                    $homePlayers[$pos],
+                    $awayPlayers[$this->matchUp->resolve($pos)]
+                ]);
             }
         }
+
+        return $field;
     }
 }

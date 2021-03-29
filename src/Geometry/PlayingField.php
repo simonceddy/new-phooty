@@ -4,14 +4,15 @@ namespace Phooty\Geometry;
 use Ds\{
     Map
 };
+use Evenement\EventEmitterInterface;
 
 class PlayingField
 {
     private Map $map;
 
     public function __construct(
-        private int $width = 60,
-        private int $length = 110
+        private FieldDimensions $dimensions,
+        private EventEmitterInterface $emitter
     ) {
         $this->map = new Map();
     }
@@ -31,7 +32,7 @@ class PlayingField
      */ 
     public function width()
     {
-        return $this->width;
+        return $this->dimensions->width();
     }
 
     /**
@@ -41,7 +42,7 @@ class PlayingField
      */ 
     public function length()
     {
-        return $this->length;
+        return $this->dimensions->length();
     }
 
     /**
@@ -54,15 +55,19 @@ class PlayingField
     public function dimensions()
     {
         return [
-            $this->width,
-            $this->length
+            $this->dimensions->width(),
+            $this->dimensions->length()
         ];
     }
 
     public function at(int $x, int $y, array $entites = [])
     {
+        // TODO validate coords within dimensions
         if (!$this->map->offsetExists([$x, $y])) {
-            $this->map[[$x, $y]] = new FieldSegment($entites);
+            $this->map[[$x, $y]] = new FieldSegment(
+                $this->emitter,
+                $entites
+            );
         }
         return $this->map[[$x, $y]];
     }

@@ -29,4 +29,13 @@ class Position
     {
         return $this->teamPlayer->team();
     }
+
+    public function __call(string $name, array $args)
+    {
+        if (method_exists($this->teamPlayer, $name)) {
+            return call_user_func_array([$this->teamPlayer, $name], $args);
+        }
+
+        throw new \BadMethodCallException();
+    }
 }

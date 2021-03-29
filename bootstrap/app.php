@@ -1,9 +1,7 @@
 <?php
-
-use Phooty\Support\Providers\CoreProvider;
-
 $app = new Pimple\Container();
 
-$app->register(new CoreProvider());
+$app->register(new Phooty\Support\Providers\CoreProvider());
+$app->register(new Phooty\Support\Providers\DevProvider());
 
 return $app;

@@ -2,25 +2,25 @@
 namespace Phooty;
 
 use Phooty\Entities\Team;
-use Phooty\Geometry\PlayingField;
+use Phooty\Geometry\FieldDimensions;
 
 class MatchConfiguration
 {
     public function __construct(
         private Team $homeTeam,
         private Team $awayTeam,
-        private PlayingField $field
+        private FieldDimensions $dimensions
     ) {
     }
 
     /**
-     * Get the PlayingField
+     * Get the FieldDimensions object
      * 
-     * @return PlayingField
+     * @return FieldDimensions
      */ 
-    public function field()
+    public function dimensions()
     {
-        return $this->field;
+        return $this->dimensions;
     }
 
     /**

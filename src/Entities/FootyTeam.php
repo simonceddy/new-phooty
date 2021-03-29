@@ -19,4 +19,13 @@ class FootyTeam implements Team
     {
         return $this->players;
     }
+
+    public function player(string $pos): Position
+    {
+        if (!isset($this->players[$pos])) {
+            throw new \InvalidArgumentException("Invalid position: {$pos}");
+        }
+
+        return $this->players[$pos];
+    }
 }

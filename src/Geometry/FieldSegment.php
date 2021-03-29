@@ -1,10 +1,14 @@
 <?php
 namespace Phooty\Geometry;
 
+use Evenement\EventEmitterInterface;
+
 class FieldSegment
 {
-    public function __construct(private array $entites = [])
-    {
+    public function __construct(
+        private EventEmitterInterface $emitter,
+        private array $entites = []
+    ) {
     }
 
     /**

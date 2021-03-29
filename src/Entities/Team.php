@@ -9,4 +9,6 @@ interface Team
      * @return Position[]
      */
     public function players();
+
+    public function player(string $pos): Position;
 }

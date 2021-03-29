@@ -1,6 +1,8 @@
 <?php
 namespace Phooty\Actions;
 
+use Phooty\MatchState;
+
 interface Action
 {
     /**
@@ -11,4 +13,8 @@ interface Action
      * @return int
      */
     public function duration(): int;
+
+    public function process(MatchState $match);
+
+    public function type(): string;
 }

@@ -14,6 +14,8 @@ use Phooty\{
     Kernel,
     Support\ConfigFactory,
 };
+use Phooty\Support\MatchUp;
+use Phooty\Support\SetField;
 use Pimple\{
     Container,
     ServiceProviderInterface
@@ -21,14 +23,8 @@ use Pimple\{
 
 class CoreProvider implements ServiceProviderInterface
 {
-    public function register(Container $app)
+    private function registerEmitter(Container $app)
     {
-        $app[Config::class] = function () {
-            return (new ConfigFactory())->load([
-                projectRoot() . '/config'
-            ]);
-        };
-
         $app[EventEmitterInterface::class] = function () {
             return new EventEmitter();
         };
@@ -36,7 +32,10 @@ class CoreProvider implements ServiceProviderInterface
         $app[EventEmitter::class] = function (Container $c) {
             return $c[EventEmitterInterface::class];
         };
+    }
 
+    public function registerTimekeepers(Container $app)
+    {
         $app[TimeKeeper::class] = function (Container $c) {
             // dd($c[Config::class]);
             return (new BootTimeKeeper())->boot($c[Config::class], $c[EventEmitter::class]);
@@ -45,6 +44,19 @@ class CoreProvider implements ServiceProviderInterface
         $app[Timer::class] = function (Container $c) {
             return new Timer($c[TimeKeeper::class]);
         };
+    }
+
+    public function register(Container $app)
+    {
+        $app[Config::class] = function () {
+            return (new ConfigFactory())->load([
+                projectRoot() . '/config'
+            ]);
+        };
+
+        $this->registerEmitter($app);
+
+        $this->registerTimekeepers($app);
 
         $app[EventLoop::class] = function (Container $c) {
             return new EventLoop($c[Timer::class]);
@@ -52,9 +64,20 @@ class CoreProvider implements ServiceProviderInterface
 
         $app[Kernel::class] = function (Container $c) {
             return new Kernel(
-                $c[EventEmitter::class],
-                $c[EventLoop::class],
-                $c[Config::class]
+                $c,
+                $c[Config::class],
+                $c[EventEmitter::class]
+            );
+        };
+
+        $app[MatchUp::class] = function (Container $c) {
+            return new MatchUp($c[Config::class]['players.matchUps']);
+        };
+
+        $app[SetField::class] = function (Container $c) {
+            return new SetField(
+                $c[Config::class]['players.positions'],
+                $c[MatchUp::class]
             );
         };
     }
