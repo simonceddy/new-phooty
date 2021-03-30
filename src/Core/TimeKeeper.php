@@ -11,9 +11,7 @@ class TimeKeeper
         private EventEmitter $emitter,
         private int $periodLength = 12000,
         private int $totalPeriods = 4
-    ) {
-        
-    }
+    ) {}
 
     public function __invoke(Timer $timer)
     {

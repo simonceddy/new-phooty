@@ -1,9 +1,12 @@
 <?php
 namespace Phooty\Actions;
 
+use Phooty\Actions\Stats\Hitout;
+use Phooty\MatchState;
+
 class BallUp implements Action
 {
-    use Support\EmptyAction;
+    use Support\IsRuckContest;
 
     public function duration(): int
     {
@@ -13,5 +16,10 @@ class BallUp implements Action
     public function type(): string
     {
         return 'ballUp';
+    }
+
+    public function process(MatchState $match)
+    {
+        return new Hitout($this->ruckContest($match)->teamPlayer());
     }
 }

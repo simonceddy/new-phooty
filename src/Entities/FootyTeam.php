@@ -10,7 +10,7 @@ class FootyTeam implements Team
         private array $players
     ) {}
 
-    public function data()
+    public function data(): TeamData
     {
         return $this->data;
     }

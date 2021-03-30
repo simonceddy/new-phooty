@@ -2,6 +2,7 @@
 namespace Phooty\Actions\Support;
 
 use Phooty\Entities\TeamPlayer;
+use Phooty\MatchState;
 
 trait IsPlayerStat
 {
@@ -15,8 +16,24 @@ trait IsPlayerStat
      * 
      * @return TeamPlayer
      */ 
-    public function player()
+    public function player(): TeamPlayer
     {
         return $this->player;
+    }
+
+    protected function getTarget(string $pos, MatchState $match)
+    {
+        $teamData = $this->player->team();
+        $target = $match->team($teamData)->player($pos)->teamPlayer();
+
+        return $target;
+    }
+
+    protected function getOpponent(string $pos, MatchState $match)
+    {
+        $teamData = $this->player->team();
+        $opponent = $match->opposition($teamData)->player($pos)->teamPlayer();
+
+        return $opponent;
     }
 }

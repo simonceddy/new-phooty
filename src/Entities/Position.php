@@ -18,11 +18,11 @@ class Position
     /**
      * Get the Player object
      * 
-     * @return Player
+     * @return TeamPlayer
      */ 
-    public function player()
+    public function teamPlayer()
     {
-        return $this->teamPlayer->player();
+        return $this->teamPlayer;
     }
 
     public function team()

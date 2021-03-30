@@ -1,6 +1,8 @@
 <?php
 namespace Phooty\Entities;
 
+use Phooty\Entities\Attributes\TeamData;
+
 interface Team
 {
     /**
@@ -11,4 +13,6 @@ interface Team
     public function players();
 
     public function player(string $pos): Position;
+
+    public function data(): TeamData;
 }

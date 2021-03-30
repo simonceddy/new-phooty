@@ -1,6 +1,7 @@
 <?php
 namespace Phooty;
 
+use Phooty\Entities\Attributes\TeamData;
 use Phooty\Geometry\PlayingField;
 use Phooty\Entities\Team;
 use Phooty\Geometry\FieldDimensions;
@@ -11,12 +12,15 @@ use Phooty\Geometry\FieldDimensions;
  * @method Team homeTeam()
  * @method Team awayTeam()
  * @method FieldDimensions dimensions()
+ * @method Team team(TeamData $data)
+ * @method Team opposition(TeamData $data)
  */
 class MatchState
 {
     public function __construct(
-        private MatchConfiguration $matchConfig,
+        private MatchConfiguration $config,
         private PlayingField $field,
+        private MatchData $data
     ) {}
 
     public function field()
@@ -26,13 +30,24 @@ class MatchState
 
     public function matchConfig()
     {
-        return $this->matchConfig;
+        return $this->config;
     }
 
     public function __call(string $name, array $args)
     {
-        if (method_exists($this->matchConfig, $name)) {
-            return call_user_func_array([$this->matchConfig, $name], $args);
+        if (method_exists($this->config, $name)) {
+            return call_user_func_array([$this->config, $name], $args);
         }
+        if (method_exists($this->data, $name)) {
+            return call_user_func_array([$this->data, $name], $args);
+        }
+    }
+
+    /**
+     * Get the MatchData object
+     */ 
+    public function data()
+    {
+        return $this->data;
     }
 }

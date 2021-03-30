@@ -1,7 +1,7 @@
 <?php
 namespace Phooty\Actions;
 
-use Phooty\Actions\Disposals\Hitout;
+use Phooty\Actions\Stats\Hitout;
 use Phooty\MatchState;
 
 class CenterBounce implements Action
@@ -15,7 +15,7 @@ class CenterBounce implements Action
 
     public function process(MatchState $match)
     {
-        return new Hitout($this->ruckContest($match));
+        return new Hitout($this->ruckContest($match)->teamPlayer());
     }
 
     public function type(): string

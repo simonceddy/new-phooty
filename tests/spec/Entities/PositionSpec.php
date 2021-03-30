@@ -2,13 +2,13 @@
 
 namespace spec\Phooty\Entities;
 
-use Phooty\Entities\Player;
+use Phooty\Entities\TeamPlayer;
 use Phooty\Entities\Position;
 use PhpSpec\ObjectBehavior;
 
 class PositionSpec extends ObjectBehavior
 {
-    function let(Player $player)
+    function let(TeamPlayer $player)
     {
         $this->beConstructedWith('RU', $player);
     }
