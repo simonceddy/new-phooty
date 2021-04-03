@@ -14,6 +14,6 @@ class Stoppage implements Action
 
     public function process(MatchState $match)
     {
-        return new BallUp();
+        return [BallUp::class];
     }
 }

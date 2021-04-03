@@ -6,8 +6,10 @@ use Phooty\MatchState;
 
 trait IsPlayerStat
 {
-    public function __construct(protected TeamPlayer $player)
-    {
+    public function __construct(
+        protected GetTarget $getTarget,
+        protected TeamPlayer $player,
+    ) {
         
     }
 

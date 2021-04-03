@@ -1,13 +1,14 @@
 <?php
 namespace Phooty\Entities;
 
+use Phooty\Entities\Attributes\PlayerData;
 use Phooty\Entities\Attributes\TeamData;
 
-class TeamPlayer
+class TeamPlayer implements Player
 {
     public function __construct(
         private TeamData $team,
-        private Player $player
+        private PlayerData $player
     )
     {}
 

@@ -15,7 +15,8 @@ class CenterBounce implements Action
 
     public function process(MatchState $match)
     {
-        return new Hitout($this->ruckContest($match)->teamPlayer());
+        return [Hitout::class, $this->ruckContest($match)->teamPlayer()];
+        // return new Hitout($this->ruckContest($match)->teamPlayer());
     }
 
     public function type(): string

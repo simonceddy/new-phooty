@@ -24,6 +24,6 @@ class Handball implements Action, PlayerAction
     {
         $target = $this->getTarget('RR', $match);
 
-        return new Kick($target);
+        return [Kick::class, $target];
     }
 }

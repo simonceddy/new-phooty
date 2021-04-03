@@ -27,10 +27,10 @@ class Hitout implements Action, PlayerAction
     {
         if (mt_rand(0, 2) === 0) {
             // sharked hitout
-            return new Clearance($this->getOpponent(
+            return [Clearance::class, $this->getOpponent(
                 $this->targets[array_rand($this->targets)],
                 $match
-            ));
+            )];
         }
 
         $target = $this->getTarget(
@@ -40,9 +40,9 @@ class Hitout implements Action, PlayerAction
 
         switch (mt_rand(0, 2)) {
             case 0:
-                return new Stoppage();
+                return [Stoppage::class];
             default:
-                return new Clearance($target);
+                return [Clearance::class, $target];
         }
     }
 }

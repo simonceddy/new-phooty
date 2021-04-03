@@ -1,15 +1,16 @@
 <?php
 
-use Phooty\Config;
+use Phooty\Actions\Support\GetTarget;
 use Phooty\Geometry\FieldDimensions;
 use Phooty\Kernel;
 use Phooty\MatchConfiguration;
-use Phooty\Support\SetField;
 use Phooty\Support\TeamFactory;
 
 require 'vendor/autoload.php';
 
 $app = include_once 'bootstrap/app.php';
+
+$getT = $app[GetTarget::class];
 
 $kernel = $app[Kernel::class];
 
@@ -18,6 +19,8 @@ $l = 110;
 $field = new FieldDimensions($w, $l);
 
 [$homeTeam, $awayTeam] = $app[TeamFactory::class]->make(2);
+
+// dd($getT->teamMate($homeTeam->player('RO')));
 
 $match = new MatchConfiguration($homeTeam, $awayTeam, $field);
 

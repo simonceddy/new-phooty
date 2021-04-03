@@ -24,9 +24,9 @@ class Clearance implements Action, PlayerAction
     {
         switch (mt_rand(0, 1)) {
             case 0:
-                return new Handball($this->player);
+                return [Handball::class, $this->player];
             default:
-                return new Kick($this->player);
+                return [Kick::class, $this->player];
         }
     }
 }

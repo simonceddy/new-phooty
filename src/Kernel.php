@@ -7,6 +7,7 @@ use Phooty\Core\EventLoop;
 use Phooty\Core\Timer;
 use Phooty\Data\Stats;
 use Phooty\Processors\ActionProcessor;
+use Phooty\Support\ActionConstructor;
 use Phooty\Support\InitPlayingField;
 use Phooty\Support\SetField;
 use Pimple\Container;
@@ -48,7 +49,8 @@ class Kernel
             new PlayProcessor([
                 new ActionProcessor(
                     $this->emitter,
-                    new CenterBounce()
+                    new CenterBounce(),
+                    $this->app[ActionConstructor::class]
                 )
             ])
         );
