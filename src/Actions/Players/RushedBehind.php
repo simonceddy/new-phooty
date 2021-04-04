@@ -1,23 +1,24 @@
 <?php
-namespace Phooty\Actions\Stats;
+namespace Phooty\Actions\Players;
 
 use Phooty\Actions\Action;
 use Phooty\Actions\PlayerAction;
-use Phooty\Actions\Support\IsPlayerStat;
+use Phooty\Actions\Support;
 use Phooty\MatchState;
 
-class Kick implements Action, PlayerAction
+class RushedBehind implements Action, PlayerAction
 {
-    use IsPlayerStat;
+    use Support\GenericAction;
+    use Support\IsPlayerAction;
 
     public function type(): string
     {
-        return 'kick';
+        return 'rushedBehind';
     }
         
     public function duration(): int
     {
-        return 500;
+        return 1500;
     }
 
     public function process(MatchState $match)

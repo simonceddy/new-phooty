@@ -3,7 +3,6 @@ namespace Phooty\Processors;
 
 use Evenement\EventEmitterInterface;
 use Phooty\Actions\Action;
-use Phooty\Actions\PlayerAction;
 use Phooty\MatchState;
 use Phooty\Support\ActionConstructor;
 
@@ -36,6 +35,8 @@ class ActionProcessor implements Processor
 
     public function reset()
     {
+        dump('resetting');
+        $this->stop();
         $this->queue = [$this->first];
     }
 
@@ -59,7 +60,7 @@ class ActionProcessor implements Processor
                 if (($duration = $action->duration()) > 0) {
                     $this->emitter->emit('tick', [$duration]);
                 }
-                if ($action instanceof PlayerAction) {
+                if ($action->isStat()) {
                     $match->data()->stats()->stat($action);
                 }
                 array_unshift($this->queue, $next);

@@ -3,7 +3,7 @@ namespace Phooty\Support;
 
 use Phooty\Entities\Attributes\TeamData;
 use Phooty\Entities\FootyTeam;
-use Phooty\Util\Text;
+use Phooty\Util\Tex;
 
 class TeamFactory
 {
@@ -20,7 +20,7 @@ class TeamFactory
         for ($i=1; $i <= $amount; $i++) {
             $teamData = new TeamData(
                 $attributes['city'] ?? $this->faker->city(),
-                $attributes['name'] ?? Text::pluralize(
+                $attributes['name'] ?? Tex::pluralize(
                     $this->faker->teamName()
                 )
             );

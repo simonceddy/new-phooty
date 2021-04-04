@@ -14,6 +14,7 @@ use Phooty\{
     Kernel,
     Support\ConfigFactory,
 };
+use Phooty\Data\Scoreboard;
 use Phooty\Support\MatchUp;
 use Phooty\Support\SetField;
 use Pimple\{
@@ -79,6 +80,10 @@ class CoreProvider implements ServiceProviderInterface
                 $c[Config::class]['players.positions'],
                 $c[MatchUp::class]
             );
+        };
+
+        $app[Scoreboard::class] = function () {
+            return new Scoreboard();
         };
     }
 }

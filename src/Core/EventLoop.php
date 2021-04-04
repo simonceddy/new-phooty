@@ -8,9 +8,7 @@ class EventLoop
     private bool $active = false;
 
     public function __construct(private Timer $timer)
-    {
-
-    }
+    {}
 
     public function start(
         MatchState $match,

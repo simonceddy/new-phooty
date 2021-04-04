@@ -1,15 +1,18 @@
 <?php
-namespace Phooty\Actions\Stats;
+namespace Phooty\Actions\Players;
 
 use Phooty\Actions\Action;
 use Phooty\Actions\PlayerAction;
 use Phooty\Actions\Stoppage;
-use Phooty\Actions\Support\IsPlayerStat;
+use Phooty\Actions\Support;
 use Phooty\MatchState;
 
 class Hitout implements Action, PlayerAction
 {
-    use IsPlayerStat;
+    use Support\GenericAction;
+    use Support\IsPlayerAction;
+
+    protected $isStat = true;
 
     private array $targets = ['RO', 'C', 'RR'];
 

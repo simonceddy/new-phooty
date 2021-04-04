@@ -5,6 +5,7 @@ use Evenement\EventEmitterInterface;
 use Phooty\Actions\CenterBounce;
 use Phooty\Core\EventLoop;
 use Phooty\Core\Timer;
+use Phooty\Data\Scoreboard;
 use Phooty\Data\Stats;
 use Phooty\Processors\ActionProcessor;
 use Phooty\Support\ActionConstructor;
@@ -29,9 +30,18 @@ class Kernel
         $this->emitter->on('tick', new Events\TickEvent(
             $this->app[Timer::class]
         ));
-        $this->emitter->on('action', new Events\ActionEvent());
+        $this->emitter->on('action', new Events\ActionEvent(
+            $this->app[Scoreboard::class]
+        ));
     }
 
+    /**
+     * Simulate a match from the given config
+     *
+     * @param MatchConfiguration $matchConfig
+     *
+     * @return MatchResult
+     */
     public function run(MatchConfiguration $matchConfig)
     {
         $match = new MatchState(
@@ -54,7 +64,7 @@ class Kernel
                 )
             ])
         );
-        return new MatchResult($match->data());
+        return new MatchResult($match->data(), $this->app[Scoreboard::class]);
     }
 
     /**

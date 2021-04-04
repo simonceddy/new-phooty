@@ -1,11 +1,12 @@
 <?php
 namespace Phooty\Actions;
 
-use Phooty\Actions\Stats\Hitout;
+use Phooty\Actions\Players\Hitout;
 use Phooty\MatchState;
 
 class CenterBounce implements Action
 {
+    use Support\GenericAction;
     use Support\IsRuckContest;
 
     public function duration(): int

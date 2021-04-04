@@ -1,9 +1,9 @@
 <?php
 namespace Phooty\Actions;
 
-use Phooty\Entities\TeamPlayer;
+use Phooty\Entities\Player;
 
 interface PlayerAction extends Action
 {
-    public function player(): TeamPlayer;
+    public function player(): Player;
 }

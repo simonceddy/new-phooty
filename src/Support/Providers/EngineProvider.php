@@ -1,8 +1,9 @@
 <?php
 namespace Phooty\Support\Providers;
 
-use Phooty\Actions\Support\GetTarget;
+use Phooty\Core\Engine\Players\GetTarget;
 use Phooty\Config;
+use Phooty\Core\Engine\PlayerAI;
 use Phooty\Support\ActionConstructor;
 use Phooty\Util\Ray;
 use Pimple\{
@@ -21,6 +22,12 @@ class EngineProvider implements ServiceProviderInterface
         $app[GetTarget::class] = function (Container $c) {
             return new GetTarget(
                 Ray::flatten($c[Config::class]['players.positions'])
+            );
+        };
+
+        $app[PlayerAI::class] = function (Container $c) {
+            return new PlayerAI(
+                $c[GetTarget::class]
             );
         };
     }

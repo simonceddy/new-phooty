@@ -17,4 +17,6 @@ interface Action
     public function process(MatchState $match);
 
     public function type(): string;
+
+    public function isStat(): bool;
 }

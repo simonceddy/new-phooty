@@ -31,4 +31,12 @@ interface Player
      * @return static
      */
     public function assignPos(Position $position): static;
+
+    /**
+     * Returns the Team the player is assigned to. May return false is the
+     * player does not have a team.
+     *
+     * @return Team|bool
+     */
+    public function team();
 }

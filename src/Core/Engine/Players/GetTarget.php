@@ -1,7 +1,9 @@
 <?php
-namespace Phooty\Actions\Support;
+namespace Phooty\Core\Engine\Players;
 
+use Phooty\Entities\Player;
 use Phooty\Entities\Position;
+use Phooty\MatchState;
 
 class GetTarget
 {
@@ -41,7 +43,7 @@ class GetTarget
         return $this->getAdjacent($this->keys[$type]);
     }
 
-    public function teamMate(Position $pos)
+    public function getAdjacentTo(Position $pos)
     {
         if (!isset($this->likelyTargets[$posType = $pos->type()])) {
             $this->likelyTargets[$posType] = $this->getTargetByPos($posType);
@@ -50,5 +52,21 @@ class GetTarget
         return $this->likelyTargets[$posType][
             array_rand($this->likelyTargets[$posType])
         ];
+    }
+
+    public function getTargetOf(Player $player, MatchState $match)
+    {
+        $pos = $player->position();
+
+        if (!$pos) {
+            throw new \LogicException('No position located');
+        }
+
+        $targetPos = $this->getAdjacentTo($pos);
+
+        $teamData = $player->team();
+        $target = $match->team($teamData)->player($targetPos);
+
+        return $target;
     }
 }

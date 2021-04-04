@@ -1,14 +1,17 @@
 <?php
-namespace Phooty\Actions\Stats;
+namespace Phooty\Actions\Players;
 
 use Phooty\Actions\Action;
 use Phooty\Actions\PlayerAction;
-use Phooty\Actions\Support\IsPlayerStat;
+use Phooty\Actions\Support;
 use Phooty\MatchState;
 
 class Handball implements Action, PlayerAction
 {
-    use IsPlayerStat;
+    use Support\GenericAction;
+    use Support\IsPlayerAction;
+
+    protected $isStat = true;
 
     public function type(): string
     {
@@ -22,7 +25,7 @@ class Handball implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
-        $target = $this->getTarget('RR', $match);
+        $target = $this->getOwnTarget($match);
 
         return [Kick::class, $target];
     }

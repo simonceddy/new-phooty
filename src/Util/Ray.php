@@ -20,4 +20,9 @@ class Ray
 
         return $result;
     }
+
+    public static function randomVal(array $source)
+    {
+        return $source[array_rand($source)];
+    }
 }

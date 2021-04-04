@@ -1,7 +1,7 @@
 <?php
 namespace Phooty\Util;
 
-class Text
+class Tex
 {
     public static function pluralize(string $word)
     {

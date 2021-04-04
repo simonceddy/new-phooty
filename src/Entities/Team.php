@@ -8,11 +8,11 @@ interface Team
     /**
      * Returns an array of Position(Player) objects assigned to the team.
      *
-     * @return Position[]
+     * @return Player[]
      */
     public function players();
 
-    public function player(string $pos): TeamPlayer;
+    public function player(string $pos): Player;
 
     public function data(): TeamData;
 }

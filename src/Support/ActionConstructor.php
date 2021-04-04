@@ -3,7 +3,7 @@ namespace Phooty\Support;
 
 use Phooty\Actions\Action;
 use Phooty\Actions\PlayerAction;
-use Phooty\Actions\Support\GetTarget;
+use Phooty\Core\Engine\PlayerAI;
 use Pimple\Container;
 
 class ActionConstructor
@@ -22,10 +22,10 @@ class ActionConstructor
         }
 
         if (isset($contracts[PlayerAction::class])
-            && (!isset($args[0]) || !($args[0] instanceof GetTarget))
+            && (!isset($args[0]) || !($args[0] instanceof PlayerAI))
         ) {
-            // dump($args[0] instanceof GetTarget);
-            array_unshift($args, $this->app[GetTarget::class]);
+            // dump($args[0] instanceof PlayerAI);
+            array_unshift($args, $this->app[PlayerAI::class]);
         }
         // dump($args);
 
