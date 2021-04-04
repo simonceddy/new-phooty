@@ -26,7 +26,7 @@ trait IsPlayerStat
     protected function getTarget(string $pos, MatchState $match)
     {
         $teamData = $this->player->team();
-        $target = $match->team($teamData)->player($pos)->teamPlayer();
+        $target = $match->team($teamData)->player($pos);
 
         return $target;
     }
@@ -34,7 +34,7 @@ trait IsPlayerStat
     protected function getOpponent(string $pos, MatchState $match)
     {
         $teamData = $this->player->team();
-        $opponent = $match->opposition($teamData)->player($pos)->teamPlayer();
+        $opponent = $match->opposition($teamData)->player($pos);
 
         return $opponent;
     }

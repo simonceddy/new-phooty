@@ -15,7 +15,9 @@ class AssignPositions
         $results = [];
         foreach($this->positions as $positions) {
             foreach ($positions as $pos => $handler) {
-                $results[$pos] = new Position($pos, array_pop($players));
+                $results[$pos] = array_pop($players)->assignPos(
+                    new Position($pos)
+                );
             }
         }
 

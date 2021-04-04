@@ -12,7 +12,7 @@ interface Team
      */
     public function players();
 
-    public function player(string $pos): Position;
+    public function player(string $pos): TeamPlayer;
 
     public function data(): TeamData;
 }
