@@ -26,6 +26,14 @@ class TeamPlayer implements Player
     {
         return $this->player;
     }
+    
+    /**
+     * Get the value of player
+     */ 
+    public function data()
+    {
+        return $this->player;
+    }
 
     /**
      * Get the value of team
@@ -40,7 +48,7 @@ class TeamPlayer implements Player
         return $this->position ?? false;
     }
     
-    public function assignPos(Position $position): static
+    public function assignPos(Position $position): Player
     {
         return new static($this->team, $this->player, $position);
     }

@@ -2,15 +2,17 @@
 namespace Phooty;
 
 use Evenement\EventEmitterInterface;
-use Phooty\Actions\CenterBounce;
-use Phooty\Core\EventLoop;
-use Phooty\Core\Timer;
-use Phooty\Data\Scoreboard;
-use Phooty\Data\Stats;
-use Phooty\Processors\ActionProcessor;
-use Phooty\Support\ActionConstructor;
-use Phooty\Support\InitPlayingField;
-use Phooty\Support\SetField;
+use Phooty\Core\{
+    EventLoop,
+    Timer,
+    Processors,
+    Events
+};
+use Phooty\Support\{
+    ActionConstructor,
+    InitPlayingField,
+    SetField
+};
 use Pimple\Container;
 
 class Kernel
@@ -31,7 +33,7 @@ class Kernel
             $this->app[Timer::class]
         ));
         $this->emitter->on('action', new Events\ActionEvent(
-            $this->app[Scoreboard::class]
+            $this->app[Data\Scoreboard::class]
         ));
     }
 
@@ -51,20 +53,23 @@ class Kernel
                 $matchConfig->awayTeam(),
                 (new InitPlayingField($this->emitter))->from($matchConfig)
             ),
-            new MatchData(new Stats())
+            new MatchData(new Data\Stats())
         );
 
         $this->app[EventLoop::class]->start(
             $match,
-            new PlayProcessor([
-                new ActionProcessor(
+            new Processors\PlayProcessor([
+                new Processors\ActionProcessor(
                     $this->emitter,
-                    new CenterBounce(),
+                    new Actions\CenterBounce(),
                     $this->app[ActionConstructor::class]
                 )
             ])
         );
-        return new MatchResult($match->data(), $this->app[Scoreboard::class]);
+        return new MatchResult(
+            $match->data(),
+            $this->app[Data\Scoreboard::class]
+        );
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-namespace Phooty\Processors;
+namespace Phooty\Core\Processors;
 
 use Phooty\MatchState;
 

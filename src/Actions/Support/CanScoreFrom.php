@@ -43,6 +43,6 @@ trait CanScoreFrom
 
     protected function attemptScore()
     {
-        return Ray::randomVal($this->actions);
+        return Ray::randVal($this->actions);
     }
 }

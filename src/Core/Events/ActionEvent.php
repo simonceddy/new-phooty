@@ -1,5 +1,5 @@
 <?php
-namespace Phooty\Events;
+namespace Phooty\Core\Events;
 
 use Phooty\Actions\Action;
 use Phooty\Actions\PlayerAction;

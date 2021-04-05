@@ -1,5 +1,5 @@
 <?php
-namespace Phooty\Processors;
+namespace Phooty\Core\Processors;
 
 use Evenement\EventEmitterInterface;
 use Phooty\Actions\Action;

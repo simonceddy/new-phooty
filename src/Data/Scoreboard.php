@@ -30,6 +30,11 @@ class Scoreboard
         }
     }
 
+    protected function sumScores(array $scores)
+    {
+        return $scores['goals'] * 6 + $scores['behinds'];
+    }
+
     public function goal(Player $player)
     {
         return $this->scoreFor($player->team(), 1);
@@ -38,5 +43,20 @@ class Scoreboard
     public function behind(Player $player)
     {
         return $this->scoreFor($player->team(), 0, 1);
+    }
+
+    public function totals()
+    {
+        $totals = [];
+        foreach ($this->scores as $team => $scores) {
+            // dd($team);
+            $totals[(string) $team] = implode('.', [
+                $scores['goals'],
+                $scores['behinds'],
+                $this->sumScores($scores)
+            ]);
+        }
+
+        return $totals;
     }
 }

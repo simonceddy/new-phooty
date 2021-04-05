@@ -16,8 +16,8 @@ class MatchConfiguration
         private FieldDimensions $dimensions
     ) {
         $this->teams = new Map();
-        $this->teams[$homeTeam->data()] = $homeTeam;
-        $this->teams[$awayTeam->data()] = $awayTeam;
+        $this->teams[$homeTeam->data()] = $this->homeTeam;
+        $this->teams[$awayTeam->data()] = $this->awayTeam;
     }
 
     public function team(TeamData $teamData)

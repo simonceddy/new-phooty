@@ -1,7 +1,7 @@
 <?php
-namespace Phooty;
+namespace Phooty\Core\Processors;
 
-use Phooty\Processors\Processor;
+use Phooty\MatchState;
 
 class PlayProcessor implements Processor
 {
@@ -11,9 +11,7 @@ class PlayProcessor implements Processor
      * @param Processor[] $processors
      */
     public function __construct(private array $processors = [])
-    {
-        
-    }
+    {}
 
     public function process(MatchState $match): MatchState
     {

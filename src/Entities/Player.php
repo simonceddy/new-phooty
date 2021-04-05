@@ -28,15 +28,15 @@ interface Player
      *
      * @param Position $position
      *
-     * @return static
+     * @return Player
      */
-    public function assignPos(Position $position): static;
+    public function assignPos(Position $position): Player;
 
     /**
-     * Returns the Team the player is assigned to. May return false is the
+     * Returns the TeamData the player is assigned to. May return false is the
      * player does not have a team.
      *
-     * @return Team|bool
+     * @return TeamData|bool
      */
     public function team();
 }

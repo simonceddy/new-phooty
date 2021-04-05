@@ -21,7 +21,7 @@ class Ray
         return $result;
     }
 
-    public static function randomVal(array $source)
+    public static function randVal(array $source)
     {
         return $source[array_rand($source)];
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Phooty\Events;
+namespace Phooty\Core\Events;
 
 use Phooty\Core\EventLoop;
 

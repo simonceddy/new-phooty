@@ -3,15 +3,11 @@ namespace Phooty\Entities\Attributes;
 
 class TeamData
 {
-    private string $short;
-
     public function __construct(
         private string $city, 
         private string $name, 
-        string $short = null
-    ) {
-        !isset($short) ?: $this->short = $short;
-    }
+        private ? string $short = null
+    ) {}
 
     /**
      * Get the team city.
@@ -41,5 +37,10 @@ class TeamData
     public function getShort()
     {
         return isset($this->short) ? $this->short : null;
+    }
+
+    public function __toString()
+    {
+        return "{$this->city} {$this->name}";
     }
 }
