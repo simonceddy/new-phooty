@@ -21,4 +21,4 @@ $match = new MatchConfiguration($homeTeam, $awayTeam, $field);
 
 $result = $kernel->run($match);
 
-dd($result->score());
+dd($result);
