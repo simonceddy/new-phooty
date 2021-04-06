@@ -4,9 +4,12 @@ namespace Phooty\Support\Providers;
 use Phooty\{
     Config,
     Support\CSVData,
-    Support\FootyFaker,
-    Support\PlayerFactory,
-    Support\TeamFactory
+    Support\FootyFaker
+};
+use Phooty\Support\Factories\{
+    MatchFactory,
+    PlayerFactory,
+    TeamFactory
 };
 use Pimple\{
     Container,
@@ -34,6 +37,12 @@ class DevProvider implements ServiceProviderInterface
                 $c[FootyFaker::class],
                 $c[PlayerFactory::class],
                 $c[Config::class]['players.positions']
+            );
+        };
+
+        $app[MatchFactory::class] = function (Container $c) {
+            return new MatchFactory(
+                $c[TeamFactory::class]
             );
         };
     }

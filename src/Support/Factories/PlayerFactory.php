@@ -1,9 +1,11 @@
 <?php
-namespace Phooty\Support;
+namespace Phooty\Support\Factories;
 
 use Phooty\Entities\{
     Attributes\PlayerData,
 };
+use Phooty\Support\FootyFaker;
+use Phooty\Support\PlayerNumberGen;
 
 class PlayerFactory
 {

@@ -1,8 +1,11 @@
 <?php
-namespace Phooty\Support;
+namespace Phooty\Support\Factories;
 
 use Phooty\Entities\Attributes\TeamData;
 use Phooty\Entities\FootyTeam;
+use Phooty\Support\AssignPositions;
+use Phooty\Support\AssignTeam;
+use Phooty\Support\FootyFaker;
 use Phooty\Util\Tex;
 
 class TeamFactory
