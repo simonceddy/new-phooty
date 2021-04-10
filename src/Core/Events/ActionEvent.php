@@ -7,13 +7,14 @@ use Phooty\Data\Scoreboard;
 
 class ActionEvent
 {
-    public function __construct(private Scoreboard $scoreboard)
-    {}
+    public function __construct(
+        private Scoreboard $scoreboard
+    ) {}
 
     public function __invoke(Action $action)
     {
         $type = $action->type();
-        echo PHP_EOL . "Emitted action: {$type}";
+        echo "Emitted action: {$type}\n";
 
         if ($type === 'goal' && $action instanceof PlayerAction) {
             $this->scoreboard->goal($action->player());

@@ -4,9 +4,12 @@ namespace Phooty\Data;
 use Ds\Map;
 use Phooty\Entities\Attributes\TeamData;
 use Phooty\Entities\Player;
+use Phooty\Support\CanBecomeJSON;
 
-class Scoreboard
+class Scoreboard implements \JsonSerializable
 {
+    use CanBecomeJSON;
+
     private Map $scores;
 
     public function __construct()
@@ -58,5 +61,16 @@ class Scoreboard
         }
 
         return $totals;
+    }
+
+    public function toArray()
+    {
+        $array = [];
+
+        foreach ($this->scores as $team => $score) {
+            $array[(string) $team] = $score;
+        }
+
+        return $array;
     }
 }

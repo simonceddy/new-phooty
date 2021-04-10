@@ -1,10 +1,13 @@
 <?php
 namespace Phooty\Support\Factories;
 
-use Phooty\Geometry\FieldDimensions;
-use Phooty\MatchConfiguration;
+use Phooty\{
+    Geometry\FieldDimensions,
+    MatchConfiguration,
+    Support\Factory
+};
 
-class MatchFactory
+class MatchFactory implements Factory
 {
     public function __construct(
         private TeamFactory $teamFactory

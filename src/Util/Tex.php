@@ -1,6 +1,9 @@
 <?php
 namespace Phooty\Util;
 
+/**
+ * A bag of string utils for the big Texan
+ */
 class Tex
 {
     public static function pluralize(string $word)

@@ -1,8 +1,12 @@
 <?php
 namespace Phooty\Entities\Attributes;
 
-class TeamData
+use Phooty\Support\CanBecomeJSON;
+
+class TeamData implements \JsonSerializable
 {
+    use CanBecomeJSON;
+
     public function __construct(
         private string $city, 
         private string $name, 
@@ -42,5 +46,13 @@ class TeamData
     public function __toString()
     {
         return "{$this->city} {$this->name}";
+    }
+
+    public function toArray()
+    {
+        return [
+            'city' => $this->city,
+            'name' => $this->name
+        ];
     }
 }

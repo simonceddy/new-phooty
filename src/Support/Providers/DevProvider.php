@@ -4,7 +4,8 @@ namespace Phooty\Support\Providers;
 use Phooty\{
     Config,
     Support\CSVData,
-    Support\FootyFaker
+    Support\FootyFaker,
+    Support\ReflectionConstructor
 };
 use Phooty\Support\Factories\{
     MatchFactory,
@@ -15,11 +16,16 @@ use Pimple\{
     Container,
     ServiceProviderInterface
 };
+use Pimple\Psr11\Container as Psr11Container;
 
 class DevProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
+        $app[ReflectionConstructor::class] = function (Container $c) {
+            return new ReflectionConstructor(new Psr11Container($c));
+        };
+
         $app[CSVData::class] = function () {
             return new CSVData();
         };

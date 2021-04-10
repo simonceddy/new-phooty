@@ -5,10 +5,11 @@ use Phooty\Entities\Attributes\TeamData;
 use Phooty\Entities\FootyTeam;
 use Phooty\Support\AssignPositions;
 use Phooty\Support\AssignTeam;
+use Phooty\Support\Factory;
 use Phooty\Support\FootyFaker;
 use Phooty\Util\Tex;
 
-class TeamFactory
+class TeamFactory implements Factory
 {
     public function __construct(
         private FootyFaker $faker,

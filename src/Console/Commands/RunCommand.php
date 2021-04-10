@@ -35,12 +35,13 @@ class RunCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Running match sim');
-
+        // dd(get_class($output));
         [$match] = $this->matchFactory->make();
 
         $results = $this->kernel->run($match);
 
-        dump($results->score()->totals());
+        // dump($results->score()->totals());
+        // dump($results->data()->stats()->sortBy('hitout')->toArray());
         return 0;
     }
 }

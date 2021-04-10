@@ -9,23 +9,27 @@ use Phooty\Console\{
     PhootyCommandLoader,
     Commands
 };
-use Phooty\Support\Factories\MatchFactory;
+use Phooty\Support\Factories;
+use Phooty\Support\ReflectionConstructor;
 use Pimple\{
     Container,
     ServiceProviderInterface
 };
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ConsoleProvider implements ServiceProviderInterface
 {
     private function registerCommands(Container $app)
     {
-        $app[Commands\RunCommand::class] = function (Container $c) {
-            return new Commands\RunCommand(
-                $c[Kernel::class], 
-                $c[MatchFactory::class]
-            );
-        };
+        $commands = $app[Config::class]['console.commands'];
+
+        foreach ($commands as $className) {
+            $app[$className] = fn(
+                Container $c
+            ) => $c[ReflectionConstructor::class]->create($className);
+        }
     }
 
     public function register(Container $app)
@@ -38,6 +42,8 @@ class ConsoleProvider implements ServiceProviderInterface
                 $c[Config::class]['console.commands']
             );
         };
+
+        $app[OutputInterface::class] = fn() => new ConsoleOutput();
 
         $app[Application::class] = function (Container $c) {
             $cli = new Application(

@@ -1,8 +1,12 @@
 <?php
 namespace Phooty\Entities\Attributes;
 
-class PlayerData
+use Phooty\Support\CanBecomeJSON;
+
+class PlayerData implements \JsonSerializable
 {
+    use CanBecomeJSON;
+
     public function __construct(
         private int $number,
         private string $givenNames, 
@@ -15,7 +19,7 @@ class PlayerData
      */ 
     public function getNumber()
     {
-            return $this->number;
+        return $this->number;
     }
 
     /**
@@ -23,7 +27,7 @@ class PlayerData
      */ 
     public function getGivenName()
     {
-            return $this->givenNames;
+        return $this->givenNames;
     }
 
     /**
@@ -31,6 +35,15 @@ class PlayerData
      */ 
     public function getSurname()
     {
-            return $this->surname;
+        return $this->surname;
+    }
+
+    public function toArray()
+    {
+        return [
+            'number' => $this->number,
+            'givenNames' => $this->givenNames,
+            'surname' => $this->surname,
+        ];
     }
 }

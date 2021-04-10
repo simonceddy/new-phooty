@@ -49,12 +49,6 @@ class CoreProvider implements ServiceProviderInterface
 
     public function register(Container $app)
     {
-        $app[Config::class] = function () {
-            return (new ConfigFactory())->load([
-                projectRoot() . '/config'
-            ]);
-        };
-
         $this->registerEmitter($app);
 
         $this->registerTimekeepers($app);

@@ -3,10 +3,14 @@ namespace Phooty\Data;
 
 use Ds\Map;
 use Phooty\Actions\PlayerAction;
-use Phooty\MatchConfiguration;
+use Phooty\Support\CanBecomeJSON;
 
-class Stats
+// use Phooty\MatchConfiguration;
+
+class Stats implements \JsonSerializable
 {
+    use CanBecomeJSON;
+
     protected Map $statlines;
 
     public function __construct()
@@ -14,16 +18,38 @@ class Stats
         $this->statlines = new Map();
     }
 
+    private function compareStat(string $type, $a, $b)
+    {
+        return $a[$type] <=> $b[$type];
+    }
+
+    public function sortBy(string $type)
+    {
+        $this->statlines->sort(
+            fn($a, $b) => $this->compareStat($type, $a, $b)
+        );
+
+        return $this;
+    }
+
     public function stat(PlayerAction $action)
     {
         $player = $action->player();
-        if (!isset($this->statlines[$team = $player->team()])) {
-            $this->statlines[$team] = new Map();
-        }
-        if (!isset($this->statlines[$team][$player])) {
-            $this->statlines[$team][$player] = new Statline($player);
+        if (!isset($this->statlines[$player])) {
+            $this->statlines[$player] = new Statline($player);
         }
 
-        $this->statlines[$team][$player]->addStat($action->type());
+        $this->statlines[$player]->addStat($action->type());
+    }
+
+    public function toArray()
+    {
+        $array = [];
+
+        foreach ($this->statlines as $player => $stats) {
+            $array[$player->name(true)] = $stats->toArray();
+        }
+
+        return $array;
     }
 }

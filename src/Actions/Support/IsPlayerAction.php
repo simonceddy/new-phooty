@@ -7,6 +7,8 @@ use Phooty\MatchState;
 
 trait IsPlayerAction
 {
+    protected Player $opponent;
+
     public function __construct(
         protected PlayerAI $ai,
         protected Player $player,
@@ -49,14 +51,16 @@ trait IsPlayerAction
     protected function getOpponent(string $pos, MatchState $match)
     {
         $teamData = $this->player->team();
-        $opponent = $match->opposition($teamData)->player($pos);
+        $this->opponent = $match->opposition($teamData)->player($pos);
 
-        return $opponent;
+        return $this->opponent;
     }
 
     public function getOwnOpponent(MatchState $match)
     {
-        return $this->getOpponent($this->player->position(), $match);
+        return !isset($this->opponent)
+            ? $this->getOpponent($this->player->position(), $match)
+            : $this->opponent;
     }
 
     public function getOwnTarget(MatchState $match)
@@ -66,5 +70,10 @@ trait IsPlayerAction
             dd($this, $target);
         }
         return $target;
+    }
+
+    public function opponent()
+    {
+        return $this->opponent ?? false;
     }
 }

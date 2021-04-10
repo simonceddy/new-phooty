@@ -2,9 +2,12 @@
 namespace Phooty\Data;
 
 use Phooty\Entities\TeamPlayer;
+use Phooty\Support\CanBecomeJSON;
 
-class Statline
+class Statline implements \ArrayAccess, \JsonSerializable
 {
+    use CanBecomeJSON;
+
     private array $stats = [];
 
     public function __construct(private TeamPlayer $player)
@@ -25,5 +28,28 @@ class Statline
         } else {
             $this->stats[$type] += $amount;
         }
+    }
+
+    public function offsetExists($type)
+    {
+        return isset($this->stats[$type]);
+    }
+
+    public function offsetGet($type)
+    {
+        return $this->stats[$type] ?? 0;
+    }
+
+    public function offsetSet($type, $amount)
+    {
+        $this->addStat($type, $amount);
+    }
+
+    public function offsetUnset($type)
+    {}
+
+    public function toArray()
+    {
+        return $this->stats;
     }
 }

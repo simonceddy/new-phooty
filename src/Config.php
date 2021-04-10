@@ -4,8 +4,7 @@ namespace Phooty;
 class Config implements \ArrayAccess
 {
     public function __construct(private array $values = [])
-    {
-    }
+    {}
 
     private function resolveRecursively(string $key, array $values)
     {

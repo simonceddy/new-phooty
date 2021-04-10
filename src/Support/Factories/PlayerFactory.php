@@ -4,21 +4,21 @@ namespace Phooty\Support\Factories;
 use Phooty\Entities\{
     Attributes\PlayerData,
 };
-use Phooty\Support\FootyFaker;
-use Phooty\Support\PlayerNumberGen;
+use Phooty\Support\{
+    Factory,
+    FootyFaker,
+    PlayerNumberGen
+};
 
-class PlayerFactory
+class PlayerFactory implements Factory
 {
     public function __construct(
         private FootyFaker $faker
-    ) {
-        
-    }
+    ) {}
 
     public function make(
         int $amount = 22,
-        array $attributes = [],
-        array $options = []
+        array $attributes = []
     ) {
         $players = [];
 

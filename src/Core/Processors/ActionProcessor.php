@@ -20,7 +20,7 @@ class ActionProcessor implements Processor
     public function __construct(
         private EventEmitterInterface $emitter,
         private Action $first,
-        private ActionConstructor $actionConstructor
+        private ActionConstructor $actionConstructor,
     ) {
         $this->queue[] = $this->first;
 
@@ -36,7 +36,7 @@ class ActionProcessor implements Processor
     public function reset()
     {
         dump('resetting');
-        $this->stop();
+        // $this->stop();
         $this->queue = [$this->first];
     }
 
@@ -48,8 +48,8 @@ class ActionProcessor implements Processor
 
             while ($this->active && !empty($this->queue)) {
                 $action = array_shift($this->queue);
-                $this->emitter->emit('action', [$action]);
                 $result = $action->process($match);
+                $this->emitter->emit('action', [$action]);
                 if (empty($result)) {
                     $next = $this->first;
                 } else {
