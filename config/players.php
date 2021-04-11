@@ -34,9 +34,9 @@ return [
         // Midfield - last to handle positioning
         // TODO make less brittle
         [
-            'RU' => fn($width, $length) => [$width / 2, $length / 2], // ruck
-            'RO' => fn($width, $length) => [($width / 2) - 2, $length / 2], // rover
-            'RR' => fn($width, $length) => [($width / 2) + 2, $length / 2], // ruck-rover
+            'RU' => fn($w, $l) => [$w / 2, $l / 2], // ruck
+            'RO' => fn($w, $l) => [($w / 2) - 2, $l / 2], // rover
+            'RR' => fn($w, $l) => [($w / 2) + 2, $l / 2], // ruck-rover
         ], 
     ],
 

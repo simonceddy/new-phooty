@@ -24,7 +24,7 @@ class PlayerFactory implements Factory
 
         $numbers = new PlayerNumberGen();
 
-        for ($i=1; $i <= $amount; $i++) {
+        for ($i=0; $i < $amount; $i++) {
             $players[$i] = new PlayerData(
                 $attributes['number'] ?? $numbers->get(),
                 $attributes['surname'] ?? $this->faker->surname(),
