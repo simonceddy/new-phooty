@@ -16,7 +16,7 @@ class Sherrin implements Footy
 
     public function loose()
     {
-        $this->player = null;
+        unset($this->player);
     }
 
     public function isLoose()
@@ -26,6 +26,6 @@ class Sherrin implements Footy
 
     public function heldBy()
     {
-        return $this->player;
+        return $this->player ?? null;
     }
 }

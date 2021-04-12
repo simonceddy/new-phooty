@@ -76,4 +76,11 @@ trait IsPlayerAction
     {
         return $this->opponent ?? false;
     }
+
+    public function gainFooty(MatchState $match)
+    {
+        if ($match->footy()->heldBy() !== $this->player) {
+            $match->footy()->gain($this->player);
+        }
+    }
 }

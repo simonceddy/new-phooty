@@ -25,6 +25,8 @@ class Handball implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        $this->gainFooty($match);
+        
         $target = $this->getOwnTarget($match);
 
         return [Kick::class, $target];

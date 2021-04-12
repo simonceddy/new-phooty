@@ -25,6 +25,8 @@ class Clearance implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        $this->gainFooty($match);
+
         switch (mt_rand(0, 1)) {
             case 0:
                 return [Handball::class, $this->player];

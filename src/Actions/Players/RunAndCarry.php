@@ -23,6 +23,7 @@ class RunAndCarry implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        $this->gainFooty($match);
 
     }
 }

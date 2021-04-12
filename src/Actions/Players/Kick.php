@@ -26,6 +26,8 @@ class Kick implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        $this->gainFooty($match);
+
         if ($this->withinRange($this->player)) {
             // handle scoring
             return [$this->attemptScore(), $this->player()];

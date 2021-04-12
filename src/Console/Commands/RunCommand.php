@@ -39,8 +39,10 @@ class RunCommand extends Command
         [$match] = $this->matchFactory->make();
 
         $results = $this->kernel->run($match);
-
-        // dump($results->score()->totals());
+        $scores = $results->score()->totals();
+        foreach ($scores as $team => $score) {
+            $output->writeln($team . ': ' . $score);
+        }
         // dump($results->data()->stats()->sortBy('hitout')->toArray());
         return 0;
     }

@@ -26,6 +26,7 @@ class Goal implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        $match->footy()->loose();
         return [CenterBounce::class];
     }
 }

@@ -4,6 +4,11 @@ namespace Phooty\Support\Providers;
 use Phooty\Core\Engine\Players\GetTarget;
 use Phooty\Config;
 use Phooty\Core\Engine\PlayerAI;
+use Phooty\Core\Engine\Players\Awareness;
+use Phooty\Core\Engine\Players\AwareOfFooty;
+use Phooty\Core\Engine\Players\AwareOfSurroundings;
+use Phooty\Entities\Footy;
+use Phooty\Entities\Sherrin;
 use Phooty\Support\ActionConstructor;
 use Phooty\Util\Ray;
 use Pimple\{
@@ -25,9 +30,29 @@ class EngineProvider implements ServiceProviderInterface
             );
         };
 
+        $app[Footy::class] = function () {
+            return new Sherrin();
+        };
+
+        $app[AwareOfFooty::class] = function (Container $c) {
+            return new AwareOfFooty($c[Footy::class]);
+        };
+
+        $app[AwareOfSurroundings::class] = function () {
+            return new AwareOfSurroundings();
+        };
+
+        $app[Awareness::class] = function (Container $c) {
+            return new Awareness(
+                $c[AwareOfFooty::class],
+                $c[AwareOfSurroundings::class]
+            );
+        };
+
         $app[PlayerAI::class] = function (Container $c) {
             return new PlayerAI(
-                $c[GetTarget::class]
+                $c[GetTarget::class],
+                $c[Awareness::class]
             );
         };
     }

@@ -8,6 +8,7 @@ class PlayerAI
 {
     public function __construct(
         private Players\GetTarget $target,
+        private Players\Awareness $awareness
     )
     {}
 

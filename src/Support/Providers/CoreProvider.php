@@ -12,7 +12,6 @@ use Phooty\{
     Core\TimeKeeper,
     Core\Timer,
     Kernel,
-    Support\ConfigFactory,
 };
 use Phooty\Data\Scoreboard;
 use Phooty\Support\MatchUp;

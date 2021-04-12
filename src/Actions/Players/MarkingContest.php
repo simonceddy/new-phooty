@@ -24,6 +24,7 @@ class MarkingContest implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        $match->footy()->loose();
         $opponent = $this->getOwnOpponent($match);
         if (mt_rand(0, 1) === 0) {
             // No mark taken

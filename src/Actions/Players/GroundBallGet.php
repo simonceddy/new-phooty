@@ -25,6 +25,7 @@ class GroundBallGet implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        $match->footy()->gain($this->player);
 
     }
 }

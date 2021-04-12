@@ -24,6 +24,7 @@ class Mark implements PlayerAction
 
     public function process(MatchState $match)
     {
+        $this->gainFooty($match);
         return [Kick::class, $this->player];
     }
 }

@@ -25,6 +25,8 @@ class Behind implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        $match->footy()->loose();
+
         return [
             Kick::class,
             $match->opposition($this->player->team())->player('RBP')

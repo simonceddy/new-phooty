@@ -1,10 +1,12 @@
 <?php
 namespace Phooty;
 
-use Phooty\Entities\Attributes\TeamData;
-use Phooty\Geometry\PlayingField;
-use Phooty\Entities\Team;
-use Phooty\Geometry\FieldDimensions;
+use Phooty\Entities\{
+    Attributes\TeamData,
+    Footy,
+    Team
+};
+use Phooty\Geometry\{PlayingField, FieldDimensions};
 
 /**
  * The MatchState object contains the current state of the simulation.
@@ -20,7 +22,8 @@ class MatchState
     public function __construct(
         private MatchConfiguration $config,
         private PlayingField $field,
-        private MatchData $data
+        private MatchData $data,
+        private Footy $footy
     ) {}
 
     public function field()
@@ -49,5 +52,15 @@ class MatchState
     public function data()
     {
         return $this->data;
+    }
+
+    /**
+     * Get the footy object
+     * 
+     * @return Footy
+     */ 
+    public function footy()
+    {
+        return $this->footy;
     }
 }
