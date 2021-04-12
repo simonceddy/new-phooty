@@ -1,7 +1,9 @@
 <?php
 namespace Phooty\Entities;
 
-interface Player
+use Phooty\Geometry\Movable;
+
+interface Player extends Movable
 {
     /**
      * Return the players full name either as an array or a string.
@@ -23,14 +25,13 @@ interface Player
     public function position();
 
     /**
-     * Assigns a position to an existing Player. Should return a new instance
-     * with appropriate constructor arguments.
+     * Assigns a position to an existing Player.
      *
      * @param Position $position
      *
-     * @return Player
+     * @return void
      */
-    public function assignPos(Position $position): Player;
+    public function assignPos(Position $position);
 
     /**
      * Returns the TeamData the player is assigned to. May return false is the

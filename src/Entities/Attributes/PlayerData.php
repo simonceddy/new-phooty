@@ -3,7 +3,7 @@ namespace Phooty\Entities\Attributes;
 
 use Phooty\Support\CanBecomeJSON;
 
-class PlayerData implements \JsonSerializable
+class PlayerData implements \JsonSerializable, \Serializable
 {
     use CanBecomeJSON;
 
@@ -45,5 +45,18 @@ class PlayerData implements \JsonSerializable
             'givenNames' => $this->givenNames,
             'surname' => $this->surname,
         ];
+    }
+
+    public function serialize()
+    {
+        return serialize($this->toArray());
+    }
+
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+        $this->number = $data['number'];
+        $this->givenNames = $data['givenNames'];
+        $this->surname = $data['surname'];
     }
 }

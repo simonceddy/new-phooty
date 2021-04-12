@@ -15,6 +15,13 @@ class PlayingField
         private EventEmitterInterface $emitter
     ) {
         $this->map = new Map();
+
+        $this->emitter->on(
+            'field.segment.empty',
+            fn() => dump(
+                'empty segment event. remove segment object from map'
+            )
+        );
     }
 
     /**
@@ -60,15 +67,27 @@ class PlayingField
         ];
     }
 
-    public function at(int $x, int $y, array $entites = [])
+    public function at(int $x, int $y, array $entities = [])
     {
         // TODO validate coords within dimensions
         if (!$this->map->offsetExists([$x, $y])) {
             $this->map[[$x, $y]] = new FieldSegment(
                 $this->emitter,
-                $entites
+                new XYCoords($x, $y)
             );
         }
+
+        if (!empty($entities)) {
+            foreach ($entities as $entity) {
+                if (!$entity instanceof Movable) {
+                    throw new \InvalidArgumentException(
+                        'Invalid entity provided to field segment!'
+                    );
+                }
+                $this->map[[$x, $y]]->addEntity($entity);
+            }
+        }
+        
         return $this->map[[$x, $y]];
     }
 }

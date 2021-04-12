@@ -1,7 +1,7 @@
 <?php
 namespace Phooty;
 
-class Config implements \ArrayAccess
+class Config implements \ArrayAccess, \Serializable
 {
     public function __construct(private array $values = [])
     {}
@@ -71,5 +71,15 @@ class Config implements \ArrayAccess
     public function offsetUnset($offset)
     {
         // does nothing
+    }
+
+    public function serialize()
+    {
+        return serialize($this->values);
+    }
+
+    public function unserialize($serialized)
+    {
+        $this->values = unserialize($serialized);
     }
 }

@@ -15,4 +15,26 @@ class XYCoords
     {
         return $this->y;
     }
+
+    /**
+     * Return the coordinates as an array. Useful for destructuring.
+     *
+     * @return array [$x, $y]
+     */
+    public function get()
+    {
+        return [$this->x, $this->y];
+    }
+
+    public function __get(string $name)
+    {
+        switch (mb_strtolower($name)) {
+            case 'x':
+                return $this->x;
+            case 'y':
+                return $this->y;
+        }
+
+        throw new \Exception('Undefined property: ' . $name);
+    }
 }

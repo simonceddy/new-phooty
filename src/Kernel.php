@@ -95,7 +95,7 @@ class Kernel
                 $matchConfig->awayTeam(),
                 (new InitPlayingField($this->emitter))->from($matchConfig)
             ),
-            new MatchData(new Data\Stats())
+            new MatchData(new Data\Stats(), $matchConfig)
         );
 
         $this->app[EventLoop::class]->start(
@@ -108,10 +108,14 @@ class Kernel
                 )
             ])
         );
-        return new MatchResult(
+
+        $result = new MatchResult(
             $match->data(),
             $this->app[Data\Scoreboard::class]
         );
+
+        dd($result);
+        return $result;
     }
 
     /**

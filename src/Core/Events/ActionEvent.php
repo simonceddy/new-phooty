@@ -14,7 +14,7 @@ class ActionEvent
     public function __invoke(Action $action)
     {
         $type = $action->type();
-        echo "Emitted action: {$type}\n";
+        // echo "Emitted action: {$type}\n";
 
         if ($type === 'goal' && $action instanceof PlayerAction) {
             $this->scoreboard->goal($action->player());

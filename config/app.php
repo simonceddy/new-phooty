@@ -4,10 +4,10 @@ return [
     'version' => 'beta3jim',
 
     'plugins' => [
-        Phooty\Plugins\RoboDennisPlugin::class,
+        // Phooty\Plugins\RoboDennisPlugin::class,
     ],
 
     'providers' => [
-        Phooty\Plugins\RoboDennis\RoboDennisProvider::class
+        // Phooty\Plugins \RoboDennis\RoboDennisProvider::class
     ]
 ];

@@ -1,7 +1,7 @@
 <?php
 namespace Phooty\Entities\Attributes;
 
-class PlayerRatings implements \ArrayAccess
+class PlayerRatings implements \ArrayAccess, \Serializable
 {
     public function __construct(private array $ratings)
     {
@@ -15,7 +15,7 @@ class PlayerRatings implements \ArrayAccess
 
     public function offsetExists($offset)
     {
-        
+        return isset($this->ratings[$offset]);
     }
 
     public function offsetGet($offset)
@@ -31,5 +31,15 @@ class PlayerRatings implements \ArrayAccess
     public function offsetUnset($offset)
     {
         
+    }
+
+    public function serialize()
+    {
+        return serialize($this->ratings);
+    }
+
+    public function unserialize($serialized)
+    {
+        $this->ratings = unserialize($serialized);
     }
 }

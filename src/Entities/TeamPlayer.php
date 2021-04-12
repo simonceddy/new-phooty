@@ -1,17 +1,19 @@
 <?php
 namespace Phooty\Entities;
 
-use Phooty\Entities\Attributes\PlayerData;
-use Phooty\Entities\Attributes\TeamData;
-use Phooty\Support\CanBecomeJSON;
+use Phooty\Support\{
+    CanBecomeJSON,
+    HasCoords
+};
 
 class TeamPlayer implements Player
 {
     use CanBecomeJSON;
+    use HasCoords;
 
     public function __construct(
-        private TeamData $team,
-        private PlayerData $player,
+        private Attributes\TeamData $team,
+        private Attributes\PlayerData $player,
         private ? Position $position = null
     ) {}
 
@@ -51,9 +53,9 @@ class TeamPlayer implements Player
         return $this->position ?? false;
     }
     
-    public function assignPos(Position $position): Player
+    public function assignPos(Position $position)
     {
-        return new static($this->team, $this->player, $position);
+        $this->position = $position;
     }
 
     public function __toString()

@@ -36,6 +36,8 @@ class TeamFactory implements Factory
             );
             $teams[] = new FootyTeam($teamData, $players);
         }
+
+        // dd($teams);
         return $teams;
     }
 }
