@@ -11,9 +11,7 @@ class MatchResult implements \JsonSerializable
     public function __construct(
         private MatchData $data,
         private Scoreboard $scoreboard
-    ) {
-        
-    }
+    ) {}
 
     /**
      * Get the scoreboard

@@ -66,9 +66,9 @@ class TeamPlayer implements Player
     public function toArray()
     {
         return [
-            $this->player->toArray(),
-            $this->team->toArray(),
-            !isset($this->position) ?: $this->position()->type()
+            'player' => $this->player->toArray(),
+            'team' => $this->team->toArray(),
+            !isset($this->position) ?: 'pos' => $this->position()->type()
         ];
     }
 }

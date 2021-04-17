@@ -35,6 +35,7 @@ class Stats implements \JsonSerializable
     public function stat(PlayerAction $action)
     {
         $player = $action->player();
+        // dd($player);
         if (!isset($this->statlines[$player])) {
             $this->statlines[$player] = new Statline($player);
         }
@@ -47,7 +48,10 @@ class Stats implements \JsonSerializable
         $array = [];
 
         foreach ($this->statlines as $player => $stats) {
-            $array[$player->name(true)] = $stats->toArray();
+            $array[$player->name(true)] = [
+                'data' => $player->toArray(),
+                'stats' => $stats->toArray()
+            ];
         }
 
         return $array;
