@@ -1,5 +1,5 @@
 <?php
-namespace Phooty\Support\Providers;
+namespace Phooty\Support\Providers\Pimple;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\FilesystemCache;

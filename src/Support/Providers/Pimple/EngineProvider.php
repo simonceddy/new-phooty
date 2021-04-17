@@ -1,5 +1,5 @@
 <?php
-namespace Phooty\Support\Providers;
+namespace Phooty\Support\Providers\Pimple;
 
 use Phooty\Core\Engine\Players\GetTarget;
 use Phooty\Config;

@@ -1,5 +1,5 @@
 <?php
-namespace Phooty\Support\Providers;
+namespace Phooty\Support\Providers\Pimple;
 
 use Evenement\{
     EventEmitter,
@@ -20,6 +20,7 @@ use Pimple\{
     Container,
     ServiceProviderInterface
 };
+use Pimple\Psr11\Container as Psr11Container;
 
 class CoreProvider implements ServiceProviderInterface
 {
@@ -58,7 +59,7 @@ class CoreProvider implements ServiceProviderInterface
 
         $app[Kernel::class] = function (Container $c) {
             return new Kernel(
-                $c,
+                new Psr11Container($c),
                 $c[Config::class],
                 $c[EventEmitter::class]
             );

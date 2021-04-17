@@ -31,7 +31,9 @@
         "react/event-loop": "^1.1.1",
         "symfony/finder": "^5.2",
         "symfony/filesystem": "^5.2",
-        "doctrine/cache": "^1.10"
+        "doctrine/cache": "^1.10",
+        "illuminate/container": "^8.37",
+        "illuminate/support": "^8.37"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2",

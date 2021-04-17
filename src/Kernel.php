@@ -15,12 +15,23 @@ use Phooty\Support\{
     ReflectionConstructor,
     SetField
 };
-use Pimple\Container;
+use Psr\Container\ContainerInterface as Container;
 
+/**
+ * The Phooty Kernel is responsible for setting up and running a phooty
+ * simulation.
+ */
 class Kernel
 {
     private array $plugins = [];
 
+    /**
+     * Create a new Kernel instance
+     * 
+     * @param Container $app Bootstrapped PSR11 container
+     * @param Config $config Simulation configuration
+     * @param EventEmitterInterface $emitter The EventEmitter instance
+     */
     public function __construct(
         private Container $app,
         private Config $config,
@@ -30,12 +41,12 @@ class Kernel
     private function bootstrapEventEmitter()
     {
         $this->emitter->on('period.end', new Events\EndPeriod());
-        $this->emitter->on('loop.end', new Events\EndLoop($this->app[EventLoop::class]));
+        $this->emitter->on('loop.end', new Events\EndLoop($this->app->get(EventLoop::class)));
         $this->emitter->on('tick', new Events\TickEvent(
-            $this->app[Timer::class]
+            $this->app->get(Timer::class)
         ));
         $this->emitter->on('action', new Events\ActionEvent(
-            $this->app[Data\Scoreboard::class]
+            $this->app->get(Data\Scoreboard::class)
         ));
     }
 
@@ -54,10 +65,10 @@ class Kernel
             );
         }
 
-        if (isset($this->app[$plugin])) {
-            $this->plugins[$plugin] = $this->app[$plugin];
+        if ($this->app->has($plugin)) {
+            $this->plugins[$plugin] = $this->app->get($plugin);
         } else {
-            $this->plugins[$plugin] = $this->app[ReflectionConstructor::class]
+            $this->plugins[$plugin] = $this->app->get(ReflectionConstructor::class)
                 ->create($plugin);
         }
 
@@ -90,7 +101,7 @@ class Kernel
 
         $match = new MatchState(
             $matchConfig,
-            $this->app[SetField::class]->prepare(
+            $this->app->get(SetField::class)->prepare(
                 $matchConfig->homeTeam(),
                 $matchConfig->awayTeam(),
                 (new InitPlayingField($this->emitter))->from($matchConfig)
@@ -99,20 +110,20 @@ class Kernel
             new Entities\Sherrin()
         );
 
-        $this->app[EventLoop::class]->start(
+        $this->app->get(EventLoop::class)->start(
             $match,
             new Processors\PlayProcessor([
                 new Processors\ActionProcessor(
                     $this->emitter,
                     new Actions\CenterBounce(),
-                    $this->app[ActionConstructor::class]
+                    $this->app->get(ActionConstructor::class)
                 )
             ])
         );
 
         $result = new MatchResult(
             $match->data(),
-            $this->app[Data\Scoreboard::class]
+            $this->app->get(Data\Scoreboard::class)
         );
 
         // dd($matchConfig->homeTeam()->player('RO'));
