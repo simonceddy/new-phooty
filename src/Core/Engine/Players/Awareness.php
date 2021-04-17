@@ -10,9 +10,9 @@ class Awareness
         private AwareOfSurroundings $surroundings,
     ) {}
 
-    public function field()
+    public function surrounds()
     {
-        return $this->surroundings->field();
+        return $this->surroundings;
     }
 
     public function footy()

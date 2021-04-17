@@ -21,7 +21,7 @@ class XYCoords
      *
      * @return array [$x, $y]
      */
-    public function get()
+    public function toArray()
     {
         return [$this->x, $this->y];
     }

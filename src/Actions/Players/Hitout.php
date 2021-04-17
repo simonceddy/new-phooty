@@ -28,6 +28,8 @@ class Hitout implements Action, PlayerAction
 
     public function process(MatchState $match)
     {
+        // dd($this->ai->surrounds()->within(15)->nearbyPlayers($match->field(), $this->player));
+
         if (mt_rand(0, 2) === 0) {
             // sharked hitout
             return [Clearance::class, $this->getOpponent(

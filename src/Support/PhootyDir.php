@@ -7,11 +7,11 @@ class PhootyDir
 
     public function __construct()
     {
-        if (!isset($_SERVER['HOME'])) {
+        /* if (!isset($_SERVER['HOME'])) {
             throw new \Exception('Could not locate home dir.');
-        }
+        } */
 
-        $this->homepath = $_SERVER['HOME'];
+        $this->homepath = $_SERVER['HOME'] ?? projectRoot();
     }
 
     public function __toString()

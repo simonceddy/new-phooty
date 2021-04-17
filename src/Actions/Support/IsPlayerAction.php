@@ -13,7 +13,6 @@ trait IsPlayerAction
         protected PlayerAI $ai,
         protected Player $player,
     ) {
-        
     }
 
     /**

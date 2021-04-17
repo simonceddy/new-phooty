@@ -115,7 +115,7 @@ class Kernel
             $this->app[Data\Scoreboard::class]
         );
 
-        // dd($result);
+        // dd($matchConfig->homeTeam()->player('RO'));
         return $result;
     }
 

@@ -35,7 +35,7 @@ class ActionProcessor implements Processor
 
     public function reset()
     {
-        dump('resetting');
+        // dump('resetting');
         // $this->stop();
         $this->queue = [$this->first];
     }

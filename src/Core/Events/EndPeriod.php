@@ -7,7 +7,7 @@ class EndPeriod
 {
     public function __invoke(int $period, Timer $timer)
     {
-        echo PHP_EOL . "Period {$period} has ended" . PHP_EOL;
+        // echo PHP_EOL . "Period {$period} has ended" . PHP_EOL;
         $timer->reset();
     }
 }
