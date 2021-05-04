@@ -43,6 +43,8 @@ class RunCommand extends Command
         foreach ($scores as $team => $score) {
             $output->writeln($team . ': ' . $score);
         }
+
+        // dump(json_encode($results, JSON_PRETTY_PRINT));
         // dump($results->data()->stats()->sortBy('hitout')->toArray());
         return 0;
     }

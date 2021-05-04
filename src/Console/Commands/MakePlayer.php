@@ -23,6 +23,8 @@ class MakePlayer extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $player = $this->factory->make(1);
+        dump(json_encode($player, JSON_PRETTY_PRINT));
         return 0;
     }
 }
