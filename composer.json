@@ -16,7 +16,8 @@
     "prefer-stable": true,
     "autoload": {
        "psr-4": {
-          "Phooty\\": "src"
+          "Phooty\\": "src/current",
+          "RePhooty\\": "src/refactors"
        },
        "files": [
            "src/functions.php"
