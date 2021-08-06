@@ -23,13 +23,13 @@ I have been working on this project on and off for several years now. It's been 
 Currently the simulation can:
 
 - perform a basic simulation for a given clock duration
-- 
+- output the result to console
 - determine actions and their results by Player position and likely intended targets,
 - keep several player stats including disposals, hitouts, marks and scores,
 - turnovers can occur so possession chains can be broken,
 - plugins can be added to the simulation, currently as event listeners
 
-Currently phooty is being refactored again for something different. This usually happens when it becomes way too big, but this time will be different of course.
+Currently phooty is being refactored again for something different. This usually happens when it becomes way too big, but this time will be different for sure.
 
 Current limitations and missing features include:
 
