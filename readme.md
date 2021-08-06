@@ -45,7 +45,7 @@ Current limitations and missing features include:
 
 ## Requirements
 
-Phooty requires PHP >= 8 because I use constructor property assignment on my whole life.
+Phooty requires at least PHP 8 because I use constructor property assignment on my whole life.
 
 ## Usage
 
