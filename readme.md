@@ -16,3 +16,53 @@ I have been working on this project on and off for several years now. It's been 
 - Entity positions on the grid are updated accordingly,
 - The match state is updated accordingly,
 - When the simulation loop has finished, a match result object is returned
+- Extra processors/plugins can be added to the simulation to run additional tasks during each loop (e.g. providing expert commentary on each action from BT and DigitalDarce)
+
+## Current State
+
+Currently the simulation can:
+
+- perform a basic simulation for a given clock duration
+- 
+- determine actions and their results by Player position and likely intended targets,
+- keep several player stats including disposals, hitouts, marks and scores,
+- turnovers can occur so possession chains can be broken,
+- plugins can be added to the simulation, currently as event listeners
+
+Currently phooty is being refactored again for something different. This usually happens when it becomes way too big, but this time will be different of course.
+
+Current limitations and missing features include:
+
+- Player AI is very limited at present:
+  - Entity movement is not currently implemented as I'm undecided how I want to go about it,
+  - Subsequently, the targets of actions are currently decided by position only,
+  - Awareness of surroundings is also limited to position,
+  - This also means that turnovers can only give possession to a targets opponent, aka no help defense,
+  - There is currently no awareness of match situation,
+- Not all actions are properly implemented,
+- The structure of Entities is a bit of a mess,
+- The grid is rectangular, which we all know is ludicrous
+
+## Requirements
+
+Phooty requires PHP >= 8 because I use constructor property assignment on my whole life.
+
+## Usage
+
+Phooty can be run as command line app with the index.php file:
+
+```sh
+php your/path/to/phooty/index.php
+```
+
+This will bring up a Symfony/Console application with various options.
+
+To run the simulation add the run command:
+
+```sh
+php your/path/to/phooty/index.php run
+```
+
+This will run a simulation with random teams and players and output the result to the console.
+
+As is, the simulation also includes a RoboDennis commentator, who will provide insight into the action straight to the console while the simulation is running.
