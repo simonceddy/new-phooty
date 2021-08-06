@@ -20,7 +20,7 @@
           "RePhooty\\": "src/refactors"
        },
        "files": [
-           "src/functions.php"
+           "src/current/functions.php"
        ]
     },
     "require": {

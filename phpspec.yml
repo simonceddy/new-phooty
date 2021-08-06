@@ -1,9 +1,14 @@
 suites:
   default:
-    psr4_prefix:  Phooty
-    namespace:    Phooty
-    spec_path:    tests
-    src_path:     src
+    psr4_prefix: RePhooty
+    namespace: RePhooty
+    spec_path:    tests/refactors
+    src_path:     src/refactors
+  # current:
+  #   psr4_prefix:  Phooty
+  #   namespace:    Phooty
+  #   spec_path:    tests/current
+  #   src_path:     src/current
 
 
 formatter.name:   pretty

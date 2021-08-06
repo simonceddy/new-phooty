@@ -1,13 +1,13 @@
 <?php
 return [
     'name' => 'Phooty',
-    'version' => 'beta3jim',
+    'version' => 'beta4mackie',
 
     'plugins' => [
-        // Phooty\Plugins\RoboDennisPlugin::class,
+        Phooty\Plugins\RoboDennisPlugin::class,
     ],
 
     'providers' => [
-        // Phooty\Plugins \RoboDennis\RoboDennisProvider::class
+        Phooty\Plugins\RoboDennis\RoboDennisProvider::class
     ]
 ];
