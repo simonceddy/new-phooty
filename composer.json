@@ -34,7 +34,8 @@
         "symfony/filesystem": "^5.2",
         "doctrine/cache": "^1.10",
         "illuminate/container": "^8.37",
-        "illuminate/support": "^8.37"
+        "illuminate/support": "^8.37",
+        "reactivex/rxphp": "^2.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2",
